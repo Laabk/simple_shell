@@ -2,9 +2,10 @@
 
 /**
  * cd_home - this changes the dir to home directory
- * @datash: data relevant (environ)
+ * @datash: data operation
  * Return: nothing
  */
+
 void cd_home(data_shell *datash)
 {
 	char *n_pwd;
@@ -38,7 +39,7 @@ void cd_home(data_shell *datash)
 
 /**
  * cd_in - this changes th dir to the parent directory
- * @datash: data operationals (environ)
+ * @datash: data operational
  * Return: nothing
  */
 
@@ -89,7 +90,7 @@ void cd_in(data_shell *datash)
 /**
  * cd_go - this changes the dir to a directory given
  * by the user
- * @datash: data operations (directories)
+ * @datash: data operation
  * Return: nothing
  *
  */
@@ -122,7 +123,7 @@ void cd_go(data_shell *datash)
 
 /**
  * cd_before - this changes the dir to the previous directory
- * @datash: data operation (environ)
+ * @datash: data operation
  * Return: nothing
  *
  */
