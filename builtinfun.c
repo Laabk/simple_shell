@@ -9,7 +9,7 @@
 
 int (*get_builtin(char *cmd))(data_shell *)
 {
-	int d;
+	int d = 0;
 
 	builtin_t builtin[] = {
 		{ "env", _env },
@@ -21,10 +21,11 @@ int (*get_builtin(char *cmd))(data_shell *)
 		{ NULL, NULL }
 	};
 
-	for (d = 0; builtin[d].name; d++)
+	while (builtin[d].name)
 	{
 		if (_strcmp(builtin[d].name, cmd) == 0)
 			break;
+		d++;
 	}
 
 	return (builtin[d].f);
