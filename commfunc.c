@@ -1,7 +1,8 @@
 #include "bshell.h"
 
 /**
- * change_character - this func change | and & for all non-printed chars
+ * change_character - this func change | and & for all
+ * non-printed character
  * @input: the input string involved
  * @bool:  pointer change of type
  * Return: the changed string involved
@@ -46,8 +47,8 @@ char *change_character(char *input, int bool)
 /**
  * add_node - gets more separators and the command lines
  * in the lists involved
- * @head_l: command lines list head
- * @head_s: separator list head
+ * @head_l: the command lines list head
+ * @head_s: the separator list head
  * @input: the input string involved
  * Return: nothing
  *
@@ -83,21 +84,21 @@ void add_node(sep_list **head_s, line_list **head_l, char *input)
 
 /**
  * go_next - this sets func to go the next command line stored
- * @list_l: the command line list passed
- * @list_s: separator list passed
+ * @reck_i: the command line list passed
+ * @reck_o: separator list passed
  * @datash: data operation
  * Return: nothing
  */
 
-void go_next(sep_list **list_s, line_list **list_l, data_shell *datash)
+void go_next(sep_list **reck_o, line_list **reck_i, data_shell *datash)
 {
 	int lope_sep;
 	sep_list *vx_o;
 	line_list *vx_i;
 
 	lope_sep = 1;
-	vx_o = *list_s;
-	vx_i = *list_l;
+	vx_o = *reck_o;
+	vx_i = *reck_i;
 
 	while (vx_o != NULL && lope_sep)
 	{
@@ -119,36 +120,35 @@ void go_next(sep_list **list_s, line_list **list_l, data_shell *datash)
 			vx_o = vx_o->next;
 	}
 
-	*list_s = vx_o;
-	*list_l = vx_i;
+	*reck_o = vx_o;
+	*reck_i = vx_i;
 }
 
 /**
  * func_sort_commands - sorts the command lines according to
  * the separators ;, | and &,
- * @input: input string
+ * @input: the input string involved
  * @datash: data operation
- * @input: input string
  * Return: 0 for an exit, 1 to continue
  */
 
 int func_sort_commands(data_shell *datash, char *input)
 {
 	int lope;
-	sep_list *head_s, *list_s;
-	line_list *head_l, *list_l;
+	sep_list *head_s, *reck_o;
+	line_list *head_l, *reck_i;
 
 	head_s = NULL;
 	head_l = NULL;
 
 	add_node(&head_s, &head_l, input);
 
-	list_s = head_s;
-	list_l = head_l;
+	reck_o = head_s;
+	reck_i = head_l;
 
-	while (list_l != NULL)
+	while (reck_i != NULL)
 	{
-		datash->input = list_l->line;
+		datash->input = reck_i->line;
 		datash->args = func_sort_line(datash->input);
 		lope = execute_line(datash);
 		free(datash->args);
@@ -156,10 +156,10 @@ int func_sort_commands(data_shell *datash, char *input)
 		if (lope == 0)
 			break;
 
-		go_next(&list_s, &list_l, datash);
+		go_next(&reck_o, &reck_i, datash);
 
-		if (list_l != NULL)
-			list_l = list_l->next;
+		if (reck_i != NULL)
+			reck_i = reck_i->next;
 	}
 
 	free_sep_list(&head_s);
