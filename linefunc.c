@@ -8,12 +8,12 @@
 
 char *read_line(int *d_eag)
 {
-	char *input = NULL;
+	char *feed = NULL;
 	size_t buffsz = 0;
 
-	*d_eag = getline(&input, &buffsz, stdin);
+	*d_eag = getline(&feed, &buffsz, stdin);
 
-	return (input);
+	return (feed);
 }
 
 /**
@@ -64,7 +64,7 @@ ssize_t get_line(char **linept, size_t *a, FILE *stream)
 	int d;
 	static ssize_t input;
 	ssize_t sheval;
-	char *buffer, q = 'z';
+	char *conta, q = 'z';
 
 	if (input == 0)
 		fflush(stream);
@@ -72,15 +72,15 @@ ssize_t get_line(char **linept, size_t *a, FILE *stream)
 		return (-1);
 	input = 0;
 
-	buffer = malloc(sizeof(char) * BUFSIZE);
-	if (buffer == 0)
+	conta = malloc(sizeof(char) * BUFSIZE);
+	if (conta == 0)
 		return (-1);
 	while (q != '\n')
 	{
 		d = read(STDIN_FILENO, &d, 1);
 		if (d == -1 || (d == 0 && input == 0))
 		{
-			free(buffer);
+			free(conta);
 			return (-1);
 		}
 		if (d == 0 && input != 0)
@@ -89,12 +89,12 @@ ssize_t get_line(char **linept, size_t *a, FILE *stream)
 			break;
 		}
 		if (input >= BUFSIZE)
-			buffer = _realloc(buffer, input, input + 1);
-		buffer[input] = q;
+			conta = _realloc(conta, input, input + 1);
+		conta[input] = q;
 		input++;
 	}
-	buffer[input] = '\0';
-	bring_line(linept, a, buffer, input);
+	conta[input] = '\0';
+	bring_line(linept, a, conta, input);
 	sheval = input;
 	if (d != 0)
 		input = 0;
