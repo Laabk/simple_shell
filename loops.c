@@ -67,34 +67,34 @@ void _loops(data_shell *datash)
 {
 	int lope;
 	int d_eag;
-	char *input;
+	char *feed;
 
 	lope = 1;
 	while (lope == 1)
 	{
 		write(STDIN_FILENO, "^-^ ", 4);
-		input = read_line(&d_eag);
+		feed = read_line(&d_eag);
 		if (d_eag != -1)
 		{
-			input = _comments(input);
-			if (input == NULL)
+			feed = _comments(feed);
+			if (feed == NULL)
 				continue;
 
-			if (check_syntaxero(datash, input) == 1)
+			if (check_syntaxero(datash, feed) == 1)
 			{
 				datash->status = 2;
-				free(input);
+				free(feed);
 				continue;
 			}
-			input = rep_var(input, datash);
-			lope = func_sort_commands(datash, input);
+			feed = rep_var(feed, datash);
+			lope = func_sort_commands(datash, feed);
 			datash->counter += 1;
-			free(input);
+			free(feed);
 		}
 		else
 		{
 			lope = 0;
-			free(input);
+			free(feed);
 		}
 	}
 }
