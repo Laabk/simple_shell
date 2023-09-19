@@ -3,7 +3,7 @@
 /**
  * _isdigit - thi funct defines if string passed is a number
  * @t: the input string
- * Return: 1 if string is a number. 0 in other case.
+ * Return: 1 for string number. 0 in other case.
  */
 
 int _isdigit(const char *t)
@@ -87,7 +87,7 @@ int cmp_chars(char str[], const char *delim)
 /**
  * _strtok - this func splits a string by some delimiter.
  * @str: the input string.
- * @delim: the delimiter.
+ * @delim: the delimiter used
  * Return: the split string
  */
 
