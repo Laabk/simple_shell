@@ -75,18 +75,18 @@ char *a_itoa(int a)
 {
 	int len = get_leng(a);
 	unsigned int nums;
-	char *buffer;
+	char *conta;
 
-	buffer = malloc(sizeof(char) * (len + 1));
-	if (buffer == 0)
+	conta = malloc(sizeof(char) * (len + 1));
+	if (conta == 0)
 		return (NULL);
 
-	*(buffer + len) = '\0';
+	*(conta + len) = '\0';
 
 	if (a < 0)
 	{
 		nums = a * -1;
-		buffer[0] = '-';
+		conta[0] = '-';
 	}
 	else
 	{
@@ -95,11 +95,11 @@ char *a_itoa(int a)
 
 	len--;
 	do {
-		*(buffer + len) = (nums % 10) + '0';
+		*(conta + len) = (nums % 10) + '0';
 		nums = nums / 10;
 		len--;
 	}
 	while (nums > 0)
 		;
-	return (buffer);
+	return (conta);
 }
