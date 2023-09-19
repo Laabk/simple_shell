@@ -1,4 +1,4 @@
-Sodash is a simple shell unix command interpreter that is part of the alx low level programming module and is intended to emulate the basics sh shell. All the information given in this README is based on the sodash and bash man (1) pages
+unix shell is a simple shell unix command interpreter that is part of the alx low level programming module and is intended to emulate the basics sh shell. All the information given in this README is based on the sodash and bash man (1) pages
 
 Resources
 Read or watch:
