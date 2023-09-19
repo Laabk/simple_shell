@@ -81,25 +81,25 @@ char *func_which(char *cmd, char **_environ)
 
 int func_execute(data_shell *datash)
 {
-	char *input;
+	char *feed;
 	struct stat st;
 	int d;
 
-	input = datash->args[0];
-	for (d = 0; input[d]; d++)
+	feed = datash->args[0];
+	for (d = 0; feed[d]; d++)
 	{
-		if (input[d] == '.')
+		if (feed[d] == '.')
 		{
-			if (input[d + 1] == '.')
+			if (feed[d + 1] == '.')
 				return (0);
-			if (input[d + 1] == '/')
+			if (feed[d + 1] == '/')
 				continue;
 			else
 				break;
 		}
-		else if (input[d] == '/' && d != 0)
+		else if (feed[d] == '/' && d != 0)
 		{
-			if (input[d + 1] == '.')
+			if (feed[d + 1] == '.')
 				continue;
 			d++;
 			break;
@@ -110,7 +110,7 @@ int func_execute(data_shell *datash)
 	if (d == 0)
 		return (0);
 
-	if (stat(input + d, &st) == 0)
+	if (stat(feed + d, &st) == 0)
 	{
 		return (d);
 	}
@@ -163,11 +163,10 @@ int ero_cmd(char *dr, data_shell *datash)
 
 int execute_cmd(data_shell *datash)
 {
-	pid_t pd;
-	pid_t wpd;
+	pid_t padr, cpad;
 	int sta, exk;
 	char *dr;
-	(void) wpd;
+	(void) cpad;
 
 	exk = func_execute(datash);
 	if (exk == -1)
@@ -179,8 +178,8 @@ int execute_cmd(data_shell *datash)
 			return (1);
 	}
 
-	pd = fork();
-	if (pd == 0)
+	padr = fork();
+	if (padr == 0)
 	{
 		if (exk == 0)
 			dr = func_which(datash->args[0], datash->_environ);
@@ -188,7 +187,7 @@ int execute_cmd(data_shell *datash)
 			dr = datash->args[0];
 		execve(dr + exk, datash->args, datash->_environ);
 	}
-	else if (pd < 0)
+	else if (padr < 0)
 	{
 		perror(datash->av[0]);
 		return (1);
@@ -196,7 +195,7 @@ int execute_cmd(data_shell *datash)
 	else
 	{
 		do {
-			wpd = waitpid(pd, &sta, WUNTRACED);
+			cpad = waitpid(padr, &sta, WUNTRACED);
 		} while (!WIFEXITED(sta) && !WIFSIGNALED(sta));
 	}
 
